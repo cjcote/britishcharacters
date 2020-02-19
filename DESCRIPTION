@@ -1,0 +1,18 @@
+Package: britishcharacters
+Title: What The Package Does (one line, title case required)
+Version: 0.1
+Authors@R: person("First", "Last", email = "first.last@example.com",
+                  role = c("aut", "cre"))
+Description: What the package does (one paragraph)
+License: What license is it under?
+LazyData: true
+Depends:
+  ggplot2,
+  ggraph
+Imports: 
+  dplyr,
+  tidygraph,
+  stringr,
+  magrittr,
+  tidyr
+RoxygenNote: 7.0.2
