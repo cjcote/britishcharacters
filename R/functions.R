@@ -40,7 +40,7 @@ episode_search <- function(show_select, season_select, episode_select) {
     ggraph(layout = "kk") +
     geom_edge_diagonal(alpha = 1/50,
                    show.legend = FALSE) +
-    geom_node_label(aes(label = show_label), alpha = 3/5) +
+    geom_node_label(aes(label = show_label), color = "red", size = 4, face = "bold", alpha = 3/5) +
     geom_node_label(aes(label = character_label), size = 3)+
     theme_void()
 }
