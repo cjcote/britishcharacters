@@ -3,8 +3,8 @@ library(ggraph)
 library(tidygraph)
 library(stringr)
 
-
-map_episode <- function(show_selected, season_selected, episode_selected) {
+#' @export
+map_episode2 <- function(show_selected, season_selected, episode_selected) {
    characters %>%
     dplyr::group_by(character, show) %>%
     dplyr::count() %>%
@@ -98,45 +98,48 @@ map_episode <- function(show_selected, season_selected, episode_selected) {
 #       dplyr::distinct(character) %>% pull(character)
 #   ) & show == "Vera")
 
-
-# characters %>%
-#   dplyr::group_by(character, show) %>%
-#   dplyr::count() %>%
-#   dplyr::group_by(character) %>%
-#   dplyr::mutate(total_shows = n()) %>%
-#   dplyr::arrange(-total_shows) %>%
-#   dplyr::ungroup() %>%
-#   dplyr::filter(total_shows > 1) %>%
-#   dplyr::rename(to = character, from = show) %>%
-#   dplyr::arrange(from)  %>%
-#   left_join(
-#     characters %>%
-#       dplyr::group_by(character, show) %>%
-#       dplyr::count() %>%
-#       dplyr::group_by(character) %>%
-#       dplyr::mutate(total_shows = n()) %>%
-#       dplyr::arrange(-total_shows) %>%
-#       dplyr::ungroup() %>%
-#       dplyr::filter(total_shows > 1) %>%
-#       dplyr::rename(to = character, from = show) %>%
-#       dplyr::arrange(from)  %>%
-#       distinct(to) %>%
-#       mutate(to_index = 1:n())
-#   ) %>%
-#   left_join(
-#     characters %>%
-#       dplyr::group_by(character, show) %>%
-#       dplyr::count() %>%
-#       dplyr::group_by(character) %>%
-#       dplyr::mutate(total_shows = n()) %>%
-#       dplyr::arrange(-total_shows) %>%
-#       dplyr::ungroup() %>%
-#       dplyr::filter(total_shows > 1) %>%
-#       dplyr::rename(to = character, from = show) %>%
-#       dplyr::arrange(from)  %>%
-#       distinct(from) %>%
-#       mutate(from_index = 1:n())
-#   ) -> prepared_tbl
+#' @export
+prepare_tbl <- function() {
+  print("save as `prepared_tbl`")
+  characters %>%
+  dplyr::group_by(character, show) %>%
+  dplyr::count() %>%
+  dplyr::group_by(character) %>%
+  dplyr::mutate(total_shows = n()) %>%
+  dplyr::arrange(-total_shows) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(total_shows > 1) %>%
+  dplyr::rename(to = character, from = show) %>%
+  dplyr::arrange(from)  %>%
+  left_join(
+    characters %>%
+      dplyr::group_by(character, show) %>%
+      dplyr::count() %>%
+      dplyr::group_by(character) %>%
+      dplyr::mutate(total_shows = n()) %>%
+      dplyr::arrange(-total_shows) %>%
+      dplyr::ungroup() %>%
+      dplyr::filter(total_shows > 1) %>%
+      dplyr::rename(to = character, from = show) %>%
+      dplyr::arrange(from)  %>%
+      distinct(to) %>%
+      mutate(to_index = 1:n())
+  ) %>%
+  left_join(
+    characters %>%
+      dplyr::group_by(character, show) %>%
+      dplyr::count() %>%
+      dplyr::group_by(character) %>%
+      dplyr::mutate(total_shows = n()) %>%
+      dplyr::arrange(-total_shows) %>%
+      dplyr::ungroup() %>%
+      dplyr::filter(total_shows > 1) %>%
+      dplyr::rename(to = character, from = show) %>%
+      dplyr::arrange(from)  %>%
+      distinct(from) %>%
+      mutate(from_index = 1:n())
+  )
+}
 #
 #
 # prepared_tbl %>%
